@@ -34,7 +34,7 @@ The simulation requires 4 arguments: [Radius (R)] [Recovery Time] [Max Runs] [In
 ./serial_sim 2 5 100 pop_20_20.dat
 Running the Parallel (OpenMP) version:
 ./shared_sim 2 5 100 pop_20_20.dat
-
+bash```
 If you are deploying this on an HPC environment, submit the batch script:
 sbatch slurm_simulation.sh
 
