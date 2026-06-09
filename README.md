@@ -31,14 +31,17 @@ Make sure you have GCC and OpenMP installed. You can compile both serial and sha
 The simulation requires 4 arguments: [Radius (R)] [Recovery Time] [Max Runs] [Input File]
 
 make
-*Runnning the serial version:
+Runnning the serial version:
+
 ./serial_sim 3 2 1000 pop_20_20.dat
-*Running the Parallel (OpenMP) version:
+
+Running the Parallel (OpenMP) version:
+
 ./shared_sim 3 2 1000 pop_20_20.dat
 
-*If you are deploying this on an HPC environment, submit the batch script:
+If you are deploying this on an HPC environment, submit the batch script:
 sbatch slurm_simulation.sh
 
-*Expected Results:
+Expected Results:
 For a 128x128 grid running 1000 iterations, Radius 4, and recorvery time 3, the OpenMP version reduced execution time by 85.95% compared to the serial version, utilizing 8 threads.
 
