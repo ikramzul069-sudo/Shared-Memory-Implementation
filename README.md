@@ -2,12 +2,12 @@ C implementation of an infection spread simulation in a 2D grid. Features a perf
 
 # Infection Spread Simulation: Serial vs OpenMP (Shared Memory)
 
-## 📌 Project Overview
+## Project Overview
 This project simulates the spread of an infection/disease within a 2D grid population using the C programming language. The primary goal of this repository is to demonstrate and compare the performance differences between a standard **Sequential (Serial)** execution and a **Parallel** execution utilizing Shared Memory via **OpenMP**.
 
 This project showcases fundamental concepts of high-performance computing (HPC), state management in simulations, and memory-efficient C programming.
 
-## 🛠️ Tech Stack & Features
+## Tech Stack & Features
 * **Language:** C
 * **Parallel Computing:** OpenMP (`<omp.h>`)
 * **Build System:** `make` (Makefile)
@@ -16,7 +16,7 @@ This project showcases fundamental concepts of high-performance computing (HPC),
   * Modular codebase separating I/O operations from core simulation logic.
   * Scalable to handle varying population grid sizes.
 
-## 📁 Repository Structure
+## Repository Structure
 * `main_serial.c` : Core simulation logic executed in a single thread.
 * `main_shared.c` : Core simulation logic optimized with OpenMP for parallel execution.
 * `file_reader.c` & `simulation.h` : Helper modules for handling dataset parsing and shared structures.
@@ -24,9 +24,9 @@ This project showcases fundamental concepts of high-performance computing (HPC),
 * `Makefile` : Build automation script to compile the executables easily.
 * `slurm_simulation.sh` : Batch script to run the simulation on an HPC cluster using Slurm.
 
-## 🚀 How to Build and Run
+## How to Build and Run
 
-### 1. Compilation
+## 1. Compilation
 Make sure you have GCC and OpenMP installed. You can compile both serial and shared-memory versions simultaneously using the provided Makefile:
 ```bash
 make
