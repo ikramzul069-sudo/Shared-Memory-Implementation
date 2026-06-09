@@ -28,13 +28,14 @@ This project showcases fundamental concepts of high-performance computing (HPC),
 
 ## 1. Compilation
 Make sure you have GCC and OpenMP installed. You can compile both serial and shared-memory versions simultaneously using the provided Makefile:
-```bash
-make
 The simulation requires 4 arguments: [Radius (R)] [Recovery Time] [Max Runs] [Input File]
-./serial_sim 2 5 100 pop_20_20.dat
+
+make
+Runnning the serial version:
+./serial_sim 3 2 1000 pop_20_20.dat
 Running the Parallel (OpenMP) version:
-./shared_sim 2 5 100 pop_20_20.dat
-bash```
+./shared_sim 3 2 1000 pop_20_20.dat
+
 If you are deploying this on an HPC environment, submit the batch script:
 sbatch slurm_simulation.sh
 
