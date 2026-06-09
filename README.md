@@ -1,48 +1,63 @@
-C implementation of an infection spread simulation in a 2D grid. Features a performance comparison between serial and shared memory parallel processing via OpenMP.
+# HPC Infection Spread Simulation: Serial vs Shared Memory (OpenMP)
 
-# Infection Spread Simulation: Serial vs OpenMP (Shared Memory)
+<div align="center">
+  <img src="https://img.shields.io/badge/Language-C-blue.svg" alt="Language C">
+  <img src="https://img.shields.io/badge/Parallel-OpenMP-orange.svg" alt="OpenMP">
+</div>
 
-## Project Overview
-This project simulates the spread of an infection/disease within a 2D grid population using the C programming language. The primary goal of this repository is to demonstrate and compare the performance differences between a standard **Sequential (Serial)** execution and a **Parallel** execution utilizing Shared Memory via **OpenMP**.
+---
 
-This project showcases fundamental concepts of high-performance computing (HPC), state management in simulations, and memory-efficient C programming.
+## 1. About This Project & File Structure
 
-## Tech Stack & Features
-* **Language:** C
-* **Parallel Computing:** OpenMP (`<omp.h>`)
-* **Build System:** `make` (Makefile)
-* **Cluster Deployment:** Slurm Workload Manager (`.sh` script)
-* **Features:** * High-performance custom random number generator (`xorshift32`).
-  * Modular codebase separating I/O operations from core simulation logic.
-  * Scalable to handle varying population grid sizes.
+### Project Description
+This project is a high-performance simulation modeling the spread of an infection or disease within a 2D grid population using the C programming language. 
 
-## Repository Structure
-* `main_serial.c` : Core simulation logic executed in a single thread.
-* `main_shared.c` : Core simulation logic optimized with OpenMP for parallel execution.
-* `file_reader.c` & `simulation.h` : Helper modules for handling dataset parsing and shared structures.
-* `pop_5_5.dat`, `pop_20_20.dat`, `pop_128_128.dat` : Input datasets representing different grid sizes.
-* `Makefile` : Build automation script to compile the executables easily.
-* `slurm_simulation.sh` : Batch script to run the simulation on an HPC cluster using Slurm.
+The primary objective of this project is to demonstrate, evaluate, and compare the scalability and computational performance between two architectural approaches:
+* **Sequential (Serial Approach):** Standard baseline execution utilizing a single thread.
+* **Shared Memory (Parallel Approach):** Parallel execution utilizing **OpenMP** to distribute the computational workload across multiple threads within a single node or multi-core processor.
 
-## How to Build and Run
+This project covers essential High-Performance Computing (HPC) concepts, including thread-level parallelism, shared memory management, loop parallelization, I/O efficiency, and preventing race conditions.
 
-## 1. Compilation
-Make sure you have GCC and OpenMP installed. You can compile both serial and shared-memory versions simultaneously using the provided Makefile:
-The simulation requires 4 arguments: [Radius (R)] [Recovery Time] [Max Runs] [Input File]
+### File Structure & Functionality
+Here is a breakdown of what each file in this repository does:
+* **`main_serial.c`** : Contains the core simulation logic executed sequentially (as a baseline) on a single CPU core.
+* **`main_shared.c`** : Contains the optimized simulation logic using the OpenMP library to run in parallel across a shared memory environment.
+* **`file_reader.c`** : A helper module designed to efficiently read, parse, and allocate population matrix data from external files.
+* **`simulation.h`** : A header file containing shared function prototypes, data structures, and state definitions used across the project.
+* **`Makefile`** : A build automation script to compile the C source code into ready-to-use executables without needing to type long manual compiler commands.
+* **`pop_*.dat` (e.g., `pop_128_128.dat`)** : Input dataset files containing the initial population matrix (e.g., 128x128 dimensions) to be simulated.
 
+---
+
+## 2. Set-Up
+Before running this project, ensure your local environment has the following dependencies installed:
+
+1. **C Compiler:** GCC (a modern version supporting the C99 standard).
+2. **OpenMP Support:** Built into most modern GCC installations (requires the `-fopenmp` flag, which is already configured in the Makefile).
+3. **Build Tools:** The `make` utility to execute the Makefile.
+
+## 3. Compilation
+Open your terminal in the project directory and use the Makefile to compile both the serial and parallel versions simultaneously:
+```bash
 make
+```
+This command will generate two executables:
+gccserial (for the sequential version)
+gccshared (for the parallel OpenMP version)
 
-Runnning the serial version:
+## 4. Execution
+Both programs require 4 input arguments in the following order: [Infection Radius] [Recovery Time] [Max Runs] [Input File].
 
-./serial_sim 3 2 1000 pop_20_20.dat
+Running the Serial Version:
 
-Running the Parallel (OpenMP) version:
+```Bash
+./gccserial 4 3 1000 pop_128_128.dat
+```
 
-./shared_sim 3 2 1000 pop_20_20.dat
+Running the Parallel (OpenMP) Version:
+You can specify the number of threads you want to use by exporting the OMP_NUM_THREADS environment variable before executing the program (Example using 4 threads):
 
-If you are deploying this on an HPC environment, submit the batch script:
-sbatch slurm_simulation.sh
-
-Expected Results:
-For a 128x128 grid running 1000 iterations, Radius 4, and recorvery time 3, the OpenMP version reduced execution time by 85.95% compared to the serial version, utilizing 8 threads.
-
+```Bash
+export OMP_NUM_THREADS=4
+./gccshared 4 3 1000 pop_128_128.dat
+```
