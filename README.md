@@ -31,6 +31,7 @@ Make sure you have GCC and OpenMP installed. You can compile both serial and sha
 The simulation requires 4 arguments: [Radius (R)] [Recovery Time] [Max Runs] [Input File]
 
 make
+
 Runnning the serial version:
 
 ./serial_sim 3 2 1000 pop_20_20.dat
