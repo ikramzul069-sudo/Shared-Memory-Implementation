@@ -56,8 +56,13 @@ Running the Serial Version:
 
 Running the Parallel (OpenMP) Version:
 You can specify the number of threads you want to use by exporting the OMP_NUM_THREADS environment variable before executing the program (Example using 4 threads):
-
 ```Bash
 export OMP_NUM_THREADS=4
 ./gccshared 4 3 1000 pop_128_128.dat
+```
+
+Running on an HPC Cluster (Slurm):
+Submit the job script to the cluster's queue using the following command:
+```Bash
+sbatch slurm_simulation.sh
 ```
